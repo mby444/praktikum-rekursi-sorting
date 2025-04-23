@@ -46,6 +46,13 @@ void merge(Player arr[], int left, int mid, int right)
 
 void mergeSortDesc(Player arr[], int left, int right)
 {
+    cout << "Subarray: " << endl;
+    for (int i = left; i <= right; i++)
+    {
+        cout << arr[i].name << ": " << arr[i].points << " ";
+    }
+    cout << endl;
+
     if (right <= left)
         return;
 
@@ -54,8 +61,30 @@ void mergeSortDesc(Player arr[], int left, int right)
     mergeSortDesc(arr, left, mid);
     mergeSortDesc(arr, mid + 1, right);
 
+    cout << "merge()" << endl;
+    for (int i = left; i <= mid; i++)
+    {
+        cout << arr[i].name << ": " << arr[i].points << " ";
+    }
+
+    cout << "| ";
+
+    for (int i = mid + 1; i <= right; i++)
+    {
+        cout << arr[i].name << ": " << arr[i].points << " ";
+    }
+
+    cout << "==> ";
+
     merge(arr, left, mid, right);
+
+    for (int i = left; i <= right; i++)
+    {
+        cout << arr[i].name << ": " << arr[i].points << " ";
+    }
+    cout << endl;
 }
+
 /* End Merge Sort algorithm */
 
 void showHeader()
@@ -206,6 +235,12 @@ void sortPlayers(Player players[], int n)
 {
     int low = 0, high = n - 1;
     mergeSortDesc(players, low, high);
+
+    // for (int i = 0; i < n; i++)
+    // {
+    //     cout << players->name << ": ";
+    //     cout << players->points << endl;
+    // }
 }
 
 void playGame(Player *whitePlayerPtr, Player *blackPlayerPtr)
@@ -250,6 +285,12 @@ void runRound(Player players[], int n, int currentRound, int totalRounds)
     cout << "=== Ronde " << currentRound << " ===" << endl;
     simulateMatches(players, n);
     sortPlayers(players, n);
+
+    // for (int i = 0; i < n; i++)
+    // {
+    //     cout << players[i].name << ": " << players[i].points << endl;
+    // }
+
     cout << endl;
     runRound(players, n, currentRound + 1, totalRounds);
 }
